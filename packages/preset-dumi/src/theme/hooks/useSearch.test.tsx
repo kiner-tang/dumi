@@ -26,8 +26,22 @@ describe('theme API: useSearch', () => {
           group: { title: 'A', path: '/en/a' },
         },
       },
+      {
+        path: '/b',
+        // @ts-ignore 
+        title: {
+          "en-US": "test-title",
+          "zh-CN": "测试标题"
+        },
+        meta: {
+          locale: 'en-US',
+          slugs: [{ value: 'B', heading: 'b' }],
+          group: { title: 'A', path: '/en/a' },
+        },
+      },
     ],
     config: {
+      theme: {},
       locales: [{ name: 'zh-CN', label: '中文' }],
       menus: {},
       navs: {},

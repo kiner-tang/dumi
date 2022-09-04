@@ -64,8 +64,19 @@ const useBuiltinSearch = (keywords: string) => {
       const result = [];
 
       for (let i = 0; i < metas.length; i += 1) {
-        if (metas[i].title.toUpperCase().indexOf(val) > -1) {
-          result.push(metas[i]);
+        const title = metas[i].title;
+        if(typeof title === "string") {
+          if (title.toUpperCase().indexOf(val) > -1) {
+            result.push(metas[i]);
+          }
+        } else {
+          // 当一个页面同时配置多个标题时，支持搜索。如：同时配置中英文标题
+          // fix: https://github.com/ant-design/pro-components/issues/5837
+          Object.keys(title).forEach(_title => {
+            if (_title.toUpperCase().indexOf(val) > -1) {
+              result.push(metas[i]);
+            }
+          });
         }
       }
 
